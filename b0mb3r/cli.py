@@ -9,7 +9,6 @@ from loguru import logger
 
 os.chdir(os.path.join(pkg_resources.get_distribution("b0mb3r").location, "b0mb3r"))
 
-from b0mb3r.app.main import app
 from b0mb3r.logger import sentry_handler
 from b0mb3r.utils import open_url
 
@@ -26,7 +25,7 @@ def main(ip: str, port: int):
         asyncio.set_event_loop(loop)
 
     open_url(f"http://{ip}:{port}/")
-    uvicorn.run(app, host=ip, port=port, log_level="error")
+    uvicorn.run("b0mb3r.app.main:app", host=ip, port=port, log_level="error")
 
 
 if __name__ == "__main__":
